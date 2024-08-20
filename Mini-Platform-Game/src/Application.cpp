@@ -9,12 +9,12 @@
 #include <string>
 #include <sstream>
 
-#include "Renderer.h"
-#include "VertexBuffer.h"
-#include "VertexBufferLayout.h"
-#include "IndexBuffer.h"
-#include "VertexArray.h"
-#include "Shader.h"
+#include "Rendering/Renderer.h"
+#include "Rendering/VertexBuffer.h"
+#include "Rendering/VertexBufferLayout.h"
+#include "Rendering/IndexBuffer.h"
+#include "Rendering/VertexArray.h"
+#include "Rendering/Shader.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
