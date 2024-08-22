@@ -16,8 +16,10 @@
 #include "Rendering/VertexArray.h"
 #include "Rendering/Shader.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#include "Utils/Shape.h"
+
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 720
 
 
 int main()
@@ -58,74 +60,35 @@ int main()
 
     std::cout << glGetString(GL_VERSION) << std::endl;
     {
-        // Array for the squares vertices
-        float square[] = {
-            -0.5f, -0.5f, // 0
-             0.5f, -0.5f, // 1
-             0.5f,  0.5f, // 2
-            -0.5f,  0.5f  // 3
-        };
-
         float triangle[] = {
            -0.95f, 0.0f, // 0
            -0.55f, 0.75f, // 1
            -0.55f, 0.0f, // 2
         };
 
-        // Draw order for the vertices of the square
-        unsigned int squareIndices[] = {
-            0, 1, 2,
-            2, 3, 0
-        };
-
         unsigned int triangleIndices[] = {
             0, 1, 2,
         };
 
-        VertexArray va;
-        VertexBuffer vb(square, sizeof(square) * 2);
-        VertexBufferLayout layout;
-        //layout.Push<float>(2);
-        layout.Push(GL_FLOAT, 2);
-        va.AddBuffer(vb, layout);
+        Shader shader;
 
-        IndexBuffer ib(squareIndices, sizeof(squareIndices) / sizeof(unsigned int));
-
-        Shader shader("shaders/simpleShader.shader");
-        shader.Bind();
-        shader.SetUniform4f("u_Color", 0.8f, 0.8f, 0.8f, 1.0f);
-
-        va.Unbind();
-        shader.Unbind();
-        vb.Unbind();
-        ib.Unbind();
+        Renderer renderer;
+        
+        Shape sq(100, 100, SQUARE);
+        Shape tr(100, 100, TRIANGLE);
 
         float r = 0.0f;
         float increment = 0.05f;
-
-        VertexArray vaTriangle;
-        VertexBuffer vbTriangle(triangle, sizeof(triangle) * 2);
-        VertexBufferLayout layoutTriangle;
-        layoutTriangle.Push(GL_FLOAT, 2);
-        vaTriangle.AddBuffer(vbTriangle, layoutTriangle);
-        IndexBuffer ibTriangle(triangleIndices, sizeof(triangleIndices) / sizeof(unsigned int));
-        vaTriangle.Unbind();
-        vbTriangle.Unbind();
-        ibTriangle.Unbind();
-
-        Renderer renderer;
-
+        
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
-            /* Render here */
             renderer.Clear();
-
             shader.Bind();
-            shader.SetUniform4f("u_Color", r, 0.8f, 0.8f, 1.0f);
-
-            renderer.Draw(va, ib, shader);
-            renderer.Draw(vaTriangle, ibTriangle, shader);
+            sq.setColor(r, 0.8f, 0.8f, 1.0f);
+            sq.Draw(renderer, shader);
+            //tr.setColor(0.8f, 0.8f, r, 1.0f);
+            tr.Draw(renderer, shader);
 
             if (r > 1.0f)
                 increment = -0.05f;

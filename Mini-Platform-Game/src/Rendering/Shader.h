@@ -16,11 +16,14 @@ private:
 	std::unordered_map<std::string, int> m_UniformLocationCache;
 
 public:
+	Shader();
 	Shader(const std::string& filepath);
 	~Shader();
 
 	void Bind() const;
 	void Unbind() const;
+
+	// void setShader(const std::string& filepath)
 
 	// Set uniforms
 	void SetUniform1f(const std::string& name, float value);
