@@ -17,6 +17,7 @@
 #include "Rendering/Shader.h"
 
 #include "Utils/Shape.h"
+#include "GameObjects/Player.h"
 
 
 int main()
@@ -80,6 +81,9 @@ int main()
 
         Point newPos = sq.getPosition();
         float newPosXInc = 0.1f;
+
+        Player pl;
+        pl.setPos(-200, -200);
         
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
@@ -94,6 +98,10 @@ int main()
             tr.Rotate(-(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
             //tr.Translate(shader);
             tr.Draw(renderer, shader);
+
+            pl.setColor({ 0.1f, 1.0f, 0.0f, 1.0f }, shader);
+            pl.Inputs(window);
+            pl.Draw(renderer, shader);
 
             if (r > 1.0f)
                 increment = -0.05f;

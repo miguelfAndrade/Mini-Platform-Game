@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameObjects\Player.cpp" />
     <ClCompile Include="src\Utils\Shape.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Rendering\IndexBuffer.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="src\Rendering\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameObjects\Player.h" />
     <ClInclude Include="src\Utils\Shape.h" />
     <ClInclude Include="src\Rendering\IndexBuffer.h" />
     <ClInclude Include="src\Rendering\Renderer.h" />
