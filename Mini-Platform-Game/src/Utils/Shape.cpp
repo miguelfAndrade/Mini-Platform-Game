@@ -70,13 +70,13 @@ void Shape::calculateShapeRender() {
 	switch (m_type)
 	{
 		case SQUARE: // Array for the squares vertices
-			Point p1, p2, p3, p4;
-			calculatePositionVerticesSquare(p1, p2, p3, p4);
+			Point pointSquare1, pointSquare2, pointSquare3, pointSquare4;
+			calculatePositionVerticesSquare(pointSquare1, pointSquare2, pointSquare3, pointSquare4);
 			m_vertices.insert(m_vertices.begin(), {
-					p1.x, p1.y,
-					p2.x, p2.y,
-					p3.x, p3.y,
-					p4.x, p4.y
+					pointSquare1.x, pointSquare1.y,
+					pointSquare2.x, pointSquare2.y,
+					pointSquare3.x, pointSquare3.y,
+					pointSquare4.x, pointSquare4.y
 				});
 
 			// Draw order for the vertices of the square
@@ -87,10 +87,12 @@ void Shape::calculateShapeRender() {
 			break;
 
 		case TRIANGLE:
+			Point pointTriangle1, pointTriangle2, pointTriangle3;
+			calculatePositionVerticesTriangle(pointTriangle1, pointTriangle2, pointTriangle3);
 			m_vertices.insert(m_vertices.begin(), {
-					-0.95f, 0.0f, // 0
-					-0.55f, 0.75f, // 1
-					-0.55f, 0.0f, // 2
+					pointTriangle1.x, pointTriangle1.y,
+					pointTriangle2.x, pointTriangle2.y,
+					pointTriangle3.x, pointTriangle3.y
 				});
 
 			m_indices.insert(m_indices.cend(), {
@@ -103,22 +105,30 @@ void Shape::calculateShapeRender() {
 }
 
 void Shape::calculatePositionVerticesSquare(Point& p1, Point& p2, Point& p3, Point& p4) {
-
+	// 1st quadrant
 	p1.x = (m_pos.x + m_halfWidth) / WINDOW_SIZE_QUADRANT_X;
 	p1.y = (m_pos.y + m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
-
+	// 2nd quadrant
 	p2.x = (m_pos.x + m_halfWidth) / WINDOW_SIZE_QUADRANT_X;
 	p2.y = (m_pos.y - m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
-
+	// 3th quadrant
 	p3.x = (m_pos.x - m_halfWidth) / WINDOW_SIZE_QUADRANT_X;
 	p3.y = (m_pos.y - m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
-
+	// 4th quadrant
 	p4.x = (m_pos.x - m_halfWidth) / WINDOW_SIZE_QUADRANT_X;
 	p4.y = (m_pos.y + m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
 
 }
 
-void Shape::calculatePositionVerticesTriangle(float& vX, float& vY) {
-
+void Shape::calculatePositionVerticesTriangle(Point& p1, Point& p2, Point& p3) {
+	// Point in the Y axis
+	p1.x = m_pos.x / WINDOW_SIZE_QUADRANT_X;
+	p1.y = (m_pos.y + m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
+	// 2nd quadrant
+	p2.x = (m_pos.x + m_halfWidth) / WINDOW_SIZE_QUADRANT_X;
+	p2.y = (m_pos.y - m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
+	// 3th quadrant
+	p3.x = (m_pos.x - m_halfWidth) / WINDOW_SIZE_QUADRANT_X;
+	p3.y = (m_pos.y - m_halfHeight) / WINDOW_SIZE_QUADRANT_Y;
 }
 

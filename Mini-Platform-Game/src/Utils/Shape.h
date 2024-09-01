@@ -40,11 +40,10 @@ private:
 	VertexArray m_va;
 	VertexBufferLayout m_layout;
 	IndexBuffer m_ib;
-	// Shader m_shader;
 
 	void calculateShapeRender();
 	void calculatePositionVerticesSquare(Point& p1, Point& p2, Point& p3, Point& p4);
-	void calculatePositionVerticesTriangle(float& vX, float& vY);
+	void calculatePositionVerticesTriangle(Point& p1, Point& p2, Point& p3);
 public:
 	Shape(float width, float height, ShapeType type);
 	~Shape();
@@ -54,8 +53,8 @@ public:
 	void setPos(float x, float y);
 	void setSize(float width, float height);
 
-	Point getPosition() { return m_pos; }
-	float getWidth() { return m_width; }
-	float getHeight() { return m_height; }
+	Point getPosition() const { return m_pos; }
+	float getWidth() const { return m_width; }
+	float getHeight() const { return m_height; }
 
 };

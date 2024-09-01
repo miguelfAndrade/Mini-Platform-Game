@@ -14,4 +14,5 @@ public:
 	Player() : Shape(100, 100, SQUARE), m_walkValue(10.0f), m_jumpValue(10.0f) {};
 	~Player();
 	void Inputs(GLFWwindow* window);
+	bool HasCollided();
 };

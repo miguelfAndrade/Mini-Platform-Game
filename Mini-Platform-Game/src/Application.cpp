@@ -73,14 +73,11 @@ int main()
         Renderer renderer;
         
         Shape sq(100, 100, SQUARE);
-        Shape tr(100, 100, SQUARE);
+        Shape tr(100, 100, TRIANGLE);
         tr.setPos(-200, 200);
 
         float r = 0.0f;
         float increment = 0.05f;
-
-        Point newPos = sq.getPosition();
-        float newPosXInc = 0.1f;
 
         Player pl;
         pl.setPos(-200, -200);
@@ -91,11 +88,10 @@ int main()
             renderer.Clear();
             shader.Bind();
             sq.setColor({ r, 0.8f, 0.8f, 1.0f }, shader);
-            sq.setPos(newPos.x, newPos.y);
             sq.Rotate((float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
             sq.Draw(renderer, shader);
-            //tr.setColor(0.8f, 0.8f, r, 1.0f);
-            tr.Rotate(-(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+            tr.setColor({ r, 0.8f, 0.8f, 1.0f }, shader);
+            // tr.Rotate(-(float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
             //tr.Translate(shader);
             tr.Draw(renderer, shader);
 
@@ -109,13 +105,6 @@ int main()
                 increment = 0.05f;
 
             r += increment;
-
-            if (newPos.x > 100.0f)
-                newPosXInc = -1.0f;
-            else if (newPos.x < 0)
-                newPosXInc = 1.0f;
-
-            newPos.x += newPosXInc;
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
