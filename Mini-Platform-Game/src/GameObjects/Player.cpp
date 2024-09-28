@@ -13,5 +13,12 @@ void Player::Inputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
 		currentPos.x -= m_walkValue;
 	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+		currentPos.y += m_jumpValue;
+	}
 	setPos(currentPos.x, currentPos.y);
+}
+
+bool HasCollided(Shape shape) {
+	return false;
 }
